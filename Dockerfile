@@ -25,11 +25,14 @@ RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoload
 COPY . .
 COPY --from=frontend /app/public/build ./public/build
 
-RUN mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views storage/logs \
-    && chown -R www-data:www-data storage bootstrap/cache
+RUN rm -f bootstrap/cache/*.php \
+    && composer dump-autoload --no-dev --optimize \
+    && mkdir -p database storage/framework/cache storage/framework/sessions storage/framework/views storage/logs \
+    && touch database/database.sqlite \
+    && chown -R www-data:www-data database storage bootstrap/cache
 
 COPY Caddyfile /etc/caddy/Caddyfile
 
 EXPOSE 8080
 
-CMD ["sh", "-c", "touch /data/database.sqlite && php artisan migrate --force && php artisan optimize && frankenphp run --config /etc/caddy/Caddyfile"]
+CMD ["sh", "-c", "php artisan migrate --force && php artisan optimize && frankenphp run --config /etc/caddy/Caddyfile"]
