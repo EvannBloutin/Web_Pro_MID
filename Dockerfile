@@ -31,8 +31,6 @@ RUN rm -f bootstrap/cache/*.php \
     && touch database/database.sqlite \
     && chown -R www-data:www-data database storage bootstrap/cache
 
-COPY Caddyfile /etc/caddy/Caddyfile
+EXPOSE 10000
 
-EXPOSE 8080
-
-CMD ["sh", "-c", "php artisan migrate --force && php artisan optimize && frankenphp run --config /etc/caddy/Caddyfile"]
+CMD ["sh", "-c", "php artisan migrate --force && php artisan optimize && exec php artisan serve --host=0.0.0.0 --port=${PORT:-10000}"]

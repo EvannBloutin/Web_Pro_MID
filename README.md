@@ -17,7 +17,7 @@ Open http://127.0.0.1:8000
 
 ## Deploy on Render
 
-This project includes a Docker setup for a Render Web Service. In Render, create a new **Web Service**, connect this repository, choose **Docker** as the runtime, and deploy from the project root. Render provides the `PORT` variable automatically; the container listens on that port.
+This project includes a Docker setup for a Render Web Service. In Render, create a new **Web Service**, connect this repository, choose **Docker** as the runtime, and deploy from the project root. Render provides the `PORT` variable automatically; the container listens on that port with Laravel's PHP server.
 
 Add these environment variables in Render:
 
