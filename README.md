@@ -13,7 +13,7 @@ touch database/database.sqlite      # (Windows PowerShell: New-Item database/dat
 php artisan migrate --seed
 php artisan serve
 ```
-Open http://127.0.0.1:8000
+Open https://web-pro-mid.freehosting.dev/
 
 ## Demo accounts
 | Role   | E-mail              | Password |
